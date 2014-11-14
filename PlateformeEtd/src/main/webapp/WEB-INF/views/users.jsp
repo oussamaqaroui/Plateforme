@@ -10,14 +10,16 @@
   ${exception }
 </div>
 
+
+
+<div id="formUser" class="cadre">
+
 <!-- Tableau obligatoire ! C'est lui qui contiendra le calendrier ! -->
 <table class="ds_box" id="ds_conclass" style="display: none;">
 			<tr>
 				<td id="ds_calclass"></td>
 			</tr>
 </table>
-
-<div id="formUser" class="cadre">
  <f:form modelAttribute="user" action="saveUser" method="post" enctype="multipart/form-data">
    <table>
      <tr>
@@ -93,7 +95,7 @@
 	       <td>${p.email}</td>
 	       <td>${p.adresse}</td>
 	       <td>${p.dateNaissance}</td>
-	       <td><img alt="" src="photoUser?userID=${p.photo}"></td>
+	       <td><img alt=""src="photoUser?userID=${p.ID}"></td>
 	       <td>${p.active}</td>
 	       <td><a href="suppUser?userID=${p.ID}">Supprimer</a></td>
 	       <td><a href="editUser?userID=${p.ID}">Editer</a></td>

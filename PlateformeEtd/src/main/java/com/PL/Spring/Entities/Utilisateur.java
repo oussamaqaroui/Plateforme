@@ -31,15 +31,15 @@ public class Utilisateur {
 	private String email;
 	@Lob
 	private byte[] photo;
-	@NotEmpty
+	
 	private boolean active;//Pour savoir si le compte est activé ou pas
-	@NotEmpty
+	
 	private Date dateNaissance;
-	@NotEmpty
+	
 	private String adresse;
-	@NotEmpty
+	
 	private Date dateCreation;
-	@NotEmpty
+	
 	private Date dateModification;
 	
 	
@@ -139,7 +139,10 @@ public class Utilisateur {
 				+ active + "]";
 	}
 	
-	public Utilisateur(){}
+	public Utilisateur(){
+		super(); 
+		ID=-1;//Pour différencier les instances récupérées de la base et celles créées
+		}
 	
 
 }

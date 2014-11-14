@@ -26,6 +26,7 @@ public class UtilisateurDaoImp implements UtilisateurDaoInt{
 		this.em = em;
 	}
 
+	
 	@SuppressWarnings("rawtypes")
 	public List<Utilisateur>getUsersByProperties(Map<String,Object> Props)
 	{
@@ -68,4 +69,33 @@ public class UtilisateurDaoImp implements UtilisateurDaoInt{
 		Query query=this.em.createQuery("SELECT o from Utilisateur o");
 		return query.getResultList();
 	}
+
+	
+	@Override
+	public Utilisateur getUser(long ID) {
+		
+		return em.find(Utilisateur.class, ID);
+	}
+
+	@Override
+	public boolean supprimerUtilisateur(Utilisateur user) {
+		if(user==null) return false;
+		Utilisateur u=em.getReference(Utilisateur.class, user.getID());
+		em.remove(u);
+		return true;
+	}
+
+	@Override
+	public boolean modifierUtilisateur(Utilisateur user) {
+		this.em.merge(user);
+		return false;
+	}
+
+	@Override
+	public void ajouterUtilisateur(Utilisateur user) {
+		em.persist(user);
+	}
+
+	
+	
 }

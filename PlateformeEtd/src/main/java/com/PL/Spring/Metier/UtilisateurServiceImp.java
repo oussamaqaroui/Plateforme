@@ -29,9 +29,33 @@ public class UtilisateurServiceImp implements UtilisateurServiceInt{
 		return this.utilisateurDaoImp.getUsersByProperties(Props);
 	}
 	
+	
 	public List<Utilisateur> getAllUsers()
 	{
 		return this.utilisateurDaoImp.getAllUsers();
+	}
+
+	
+	public Utilisateur getUser(Long idUser) {
+		return utilisateurDaoImp.getUser(idUser);
+	}
+
+	@Override
+	public boolean supprimerUtilisateur(Utilisateur user) {
+		return utilisateurDaoImp.supprimerUtilisateur(user);
+		
+	}
+
+	@Override
+	public boolean modifierUtilisateur(Utilisateur user) {
+		utilisateurDaoImp.modifierUtilisateur(user);
+		return false;
+	}
+
+	@Override
+	public void ajouterUtilisateur(Utilisateur user) {
+	utilisateurDaoImp.ajouterUtilisateur(user);
+		
 	}
 
 }

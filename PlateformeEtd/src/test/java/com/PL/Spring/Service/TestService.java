@@ -17,7 +17,6 @@ import com.PL.Spring.Metier.UtilisateurServiceInt;
 public class TestService {
 
 	@Autowired
-	
 	private static UtilisateurServiceInt metier;
 	/*
 	private static ClassPathXmlApplicationContext context;
