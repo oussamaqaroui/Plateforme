@@ -2,6 +2,9 @@ package com.PL.Spring.Service;
 
 import static org.junit.Assert.*;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,12 +33,15 @@ public class TestService {
 
 	@Test
 	public void testGetUsersByProperties() {
-		fail("Not yet implemented");
+		
+		Map<String,Object>props=new TreeMap();
+		props.put("nom","amnay");
+		System.out.println(userService.getUsersByProperties(props) );
 	}
 
 	@Test
 	public void testGetAllUsers() {
-		fail("Not yet implemented");
+		System.out.println(userService.getAllUsers());
 	}
 
 }
