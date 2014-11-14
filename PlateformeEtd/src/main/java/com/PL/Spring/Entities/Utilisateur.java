@@ -1,6 +1,7 @@
 package com.PL.Spring.Entities;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,6 +31,26 @@ public class Utilisateur {
 	private byte[] photo;
 	@NotEmpty
 	private int active;//Pour savoir si le compte est activé ou pas
+	@NotEmpty
+	private Date dateNaissance;
+	@NotEmpty
+	private String adresse;
+	
+	
+	
+	
+	public Date getDateNaissance() {
+		return dateNaissance;
+	}
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
+	}
+	public String getAdresse() {
+		return adresse;
+	}
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
 	public long getID() {
 		return ID;
 	}
