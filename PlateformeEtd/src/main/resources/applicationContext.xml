@@ -32,12 +32,18 @@
   <property name="entityManagerFactory" ref="entityManagerFactory"></property>
 </bean>
 
+<bean id="dao" class="com.PL.Spring.Dao.UtilisateurDaoImp"/>
+<bean id="userService" class="com.PL.Spring.Metier.UtilisateurServiceImp">
+  <property name="utilisateurDaoImp" ref="dao"></property>
+</bean>
+
 <tx:annotation-driven transaction-manager="transactionManager" />
 <context:annotation-config></context:annotation-config>
 
 <bean id="multipartResolver"
     class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 </bean>
+
 
 
   
