@@ -24,13 +24,11 @@ public class UtilisateurServiceImp implements UtilisateurServiceInt{
 		this.utilisateurDaoImp = utilisateurDaoImp;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List<Utilisateur>getUsersByProperties(Map<String,Object> Props)
 	{
 		return this.utilisateurDaoImp.getUsersByProperties(Props);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Utilisateur> getAllUsers()
 	{
 		return this.utilisateurDaoImp.getAllUsers();

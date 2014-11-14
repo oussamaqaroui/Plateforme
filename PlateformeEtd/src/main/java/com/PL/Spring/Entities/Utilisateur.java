@@ -8,10 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
+@Table(name="utilisateurs")
 public class Utilisateur {
 	
 	@Id
@@ -30,15 +32,31 @@ public class Utilisateur {
 	@Lob
 	private byte[] photo;
 	@NotEmpty
-	private int active;//Pour savoir si le compte est activé ou pas
+	private boolean active;//Pour savoir si le compte est activé ou pas
 	@NotEmpty
 	private Date dateNaissance;
 	@NotEmpty
 	private String adresse;
+	@NotEmpty
+	private Date dateCreation;
+	@NotEmpty
+	private Date dateModification;
 	
 	
 	
 	
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+	public Date getDateModification() {
+		return dateModification;
+	}
+	public void setDateModification(Date dateModification) {
+		this.dateModification = dateModification;
+	}
 	public Date getDateNaissance() {
 		return dateNaissance;
 	}
@@ -93,16 +111,16 @@ public class Utilisateur {
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
-	public int getActive() {
+	public boolean getActive() {
 		return active;
 	}
-	public void setActive(int active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
 	
 	
 	public Utilisateur(long iD, String login, String password, String nom,
-			String prenom, String email, byte[] photo, int active) {
+			String prenom, String email, byte[] photo, boolean active) {
 		super();
 		ID = iD;
 		this.login = login;
