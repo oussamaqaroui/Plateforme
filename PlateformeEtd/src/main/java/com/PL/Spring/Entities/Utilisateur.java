@@ -100,5 +100,7 @@ public class Utilisateur {
 				+ active + "]";
 	}
 	
+	public Utilisateur(){}
+	
 
 }

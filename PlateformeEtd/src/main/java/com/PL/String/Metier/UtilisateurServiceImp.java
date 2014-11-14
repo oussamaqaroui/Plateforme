@@ -13,6 +13,7 @@ import com.PL.Spring.Entities.Utilisateur;
 @Transactional
 public class UtilisateurServiceImp implements UtilisateurServiceInt{
 	
+	
 	private UtilisateurDaoImp utilisateurDaoImp;
 	
 	@SuppressWarnings("rawtypes")
