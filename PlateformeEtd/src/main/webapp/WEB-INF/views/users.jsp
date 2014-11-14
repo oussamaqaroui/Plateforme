@@ -61,6 +61,7 @@
        </c:if>
        </td>
        <td>
+       
        <input type="file" name="file"/>
        </td>  
      </tr>
