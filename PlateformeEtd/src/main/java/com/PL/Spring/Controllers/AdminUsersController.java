@@ -45,7 +45,7 @@ public class AdminUsersController {
 	}
 	
 	@RequestMapping(value="/saveUser")
-	public String saveUser(@Valid Utilisateur user,BindingResult bindingResult,Model model,MultipartFile file) throws IOException{
+	public String saveUser(@Valid Utilisateur u,BindingResult bindingResult,Model model,MultipartFile file) throws IOException{
 		if(bindingResult.hasErrors()){
 			model.addAttribute("users",metier.getAllUsers());
 			return("users");
@@ -62,12 +62,12 @@ public class AdminUsersController {
 			baos.flush();
 			byte[] imageInByte = baos.toByteArray();
 			
-			user.setPhoto(imageInByte);
+			u.setPhoto(imageInByte);
 
 		}
 		
-		if(user.getID()==-1)metier.ajouterUtilisateur(user);
-		else  metier.modifierUtilisateur(user);
+		if(u.getID()==-1)metier.ajouterUtilisateur(u);
+		else  metier.modifierUtilisateur(u);
 		
 	
 		
@@ -81,6 +81,7 @@ public class AdminUsersController {
 		//Comment afficher une image
 		return null;
 	}
+	
 	
 	@RequestMapping(value="/suppUser")
 	public String supp(long userID,Model model){

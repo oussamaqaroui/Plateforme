@@ -141,7 +141,7 @@ public class Utilisateur {
 	
 	public Utilisateur(){
 		super(); 
-		ID=-1;//Pour différencier les instances récupérées de la base et celles créées
+		//ID=-1;//Pour différencier les instances récupérées de la base et celles créées
 		}
 	
 
