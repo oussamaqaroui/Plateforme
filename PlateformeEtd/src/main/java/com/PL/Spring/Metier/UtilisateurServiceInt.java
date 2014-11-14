@@ -1,4 +1,4 @@
-package com.PL.String.Metier;
+package com.PL.Spring.Metier;
 
 import java.util.List;
 import java.util.Map;
