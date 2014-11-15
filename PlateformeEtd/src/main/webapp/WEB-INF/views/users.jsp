@@ -32,6 +32,10 @@
        <td><f:input path="Login"/></td>
        <td><f:errors path="Login" cssClass="errors"></f:errors></td>
      </tr>
+     <td>password</td>
+       <td><f:input path="password"/></td>
+       <td><f:errors path="password" cssClass="errors"></f:errors></td>
+     </tr>
       <tr>
      <td>Nom</td>
        <td><f:input path="nom"/></td>

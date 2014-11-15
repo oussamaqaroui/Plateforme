@@ -47,27 +47,39 @@ public class AdminUsersController {
 	@RequestMapping(value="/saveUser")
 	public String saveUser(@Valid Utilisateur u,BindingResult bindingResult,Model model,MultipartFile file) throws IOException{
 		if(bindingResult.hasErrors()){
+			//model.addAttribute("user", new Utilisateur());
 			model.addAttribute("users",metier.getAllUsers());
+			
 			return("users");
 		}
 		
-		if(!file.isEmpty())
-		{
-			//String path=System.getProperty("java.io.tmpdir");
-			//user.setPhoto(file.getOriginalFilename());
-			
-			BufferedImage originalImage = ImageIO.read(new File(file.getOriginalFilename()));
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write( originalImage, "jpg", baos );
-			baos.flush();
-			byte[] imageInByte = baos.toByteArray();
-			
-			u.setPhoto(imageInByte);
-
+		
+		
+		
+		if(!file.isEmpty()){
+			String path=System.getProperty("java.io.tmpdir");
+			u.setPhoto(file.getOriginalFilename());
+			Long idP=null;
+			if(u.getID() == null){
+			  idP = metier.ajouterUtilisateur(u);
+			}
+			else{
+			  metier.modifierUtilisateur(u);
+			  idP=u.getID();
+			}
+			file.transferTo(new File(path+"/"+"PROD_"+idP+"_"+file.getOriginalFilename()));
+		}
+		else{
+			if(u.getID()==null)
+			  metier.ajouterUtilisateur(u);
+			else metier.modifierUtilisateur(u);
 		}
 		
-		if(u.getID()==-1)metier.ajouterUtilisateur(u);
-		else  metier.modifierUtilisateur(u);
+		
+	
+		
+		/*if(u.getID()==-1)metier.ajouterUtilisateur(u);
+		else  metier.modifierUtilisateur(u);*/
 		
 	
 		

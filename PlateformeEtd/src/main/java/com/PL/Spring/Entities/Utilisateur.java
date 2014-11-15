@@ -18,7 +18,7 @@ public class Utilisateur {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)	
-	private long ID;
+	private Long ID;
 	@NotEmpty
 	private String login;
 	@NotEmpty
@@ -30,7 +30,7 @@ public class Utilisateur {
 	@NotEmpty
 	private String email;
 	@Lob
-	private byte[] photo;
+	private String photo;
 	
 	private boolean active;//Pour savoir si le compte est activé ou pas
 	
@@ -69,10 +69,10 @@ public class Utilisateur {
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-	public long getID() {
+	public Long getID() {
 		return ID;
 	}
-	public void setID(long iD) {
+	public void setID(Long iD) {
 		ID = iD;
 	}
 	public String getLogin() {
@@ -105,10 +105,10 @@ public class Utilisateur {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public byte[] getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 	public boolean getActive() {
@@ -120,7 +120,7 @@ public class Utilisateur {
 	
 	
 	public Utilisateur(long iD, String login, String password, String nom,
-			String prenom, String email, byte[] photo, boolean active) {
+			String prenom, String email, String photo, boolean active) {
 		super();
 		ID = iD;
 		this.login = login;
@@ -135,7 +135,7 @@ public class Utilisateur {
 	public String toString() {
 		return "Utilisateur [ID=" + ID + ", login=" + login + ", password="
 				+ password + ", nom=" + nom + ", prenom=" + prenom + ", email="
-				+ email + ", photo=" + Arrays.toString(photo) + ", active="
+				+ email + ", photo=" + photo + ", active="
 				+ active + "]";
 	}
 	

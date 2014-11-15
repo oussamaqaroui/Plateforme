@@ -53,8 +53,9 @@ public class UtilisateurServiceImp implements UtilisateurServiceInt{
 	}
 
 	@Override
-	public void ajouterUtilisateur(Utilisateur user) {
-	utilisateurDaoImp.ajouterUtilisateur(user);
+	public Long ajouterUtilisateur(Utilisateur user) {
+		return utilisateurDaoImp.ajouterUtilisateur(user);
+	
 		
 	}
 

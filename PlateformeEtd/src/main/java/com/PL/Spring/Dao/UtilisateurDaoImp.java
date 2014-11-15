@@ -92,8 +92,9 @@ public class UtilisateurDaoImp implements UtilisateurDaoInt{
 	}
 
 	@Override
-	public void ajouterUtilisateur(Utilisateur user) {
+	public Long ajouterUtilisateur(Utilisateur user) {
 		em.persist(user);
+		return user.getID();
 	}
 
 	

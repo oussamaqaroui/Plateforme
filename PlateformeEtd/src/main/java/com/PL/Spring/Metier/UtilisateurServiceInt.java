@@ -11,6 +11,6 @@ public interface UtilisateurServiceInt {
 	public List<Utilisateur> getUsersByProperties(Map<String,Object> Props);
 	public boolean supprimerUtilisateur(Utilisateur user);
 	public boolean modifierUtilisateur(Utilisateur user);
-	public void ajouterUtilisateur(Utilisateur user);
+	public Long ajouterUtilisateur(Utilisateur user);
 	public Utilisateur getUser(Long idUser);
 }
