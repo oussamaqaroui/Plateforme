@@ -7,6 +7,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -42,20 +44,27 @@ public class AdminUsersController {
 	@Autowired
 	private UtilisateurServiceInt metier;
 	
-
-
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-
-	   SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	   dateFormat.setLenient(false);
-	   binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-	}
+	private static List<Utilisateur> Users; // Pour avoir la liste a afficher
+	
+	private static Map<String,Object> props; 
+	// Pour afficher la liste selon les critère de recherche si l'utilisateur le souhaite
+	// tout au long des opération d'édition ou de suppression ou juste d'affichage
+	// si l'utilisateur choisi d'afficher la tout les utilisateur alors props est rendu nulle
 	
 	@RequestMapping(value="/index")
 	public String index(Model model){
+		Users=metier.getAllUsers();
 		model.addAttribute("user", new Utilisateur());
-		model.addAttribute("users",metier.getAllUsers());
+		model.addAttribute("users",Users);
+		return "users";
+	}
+	
+	@RequestMapping(value="/saveUser",params="getAll")
+	public String afficherTousLesUtilisateurs(Model model){
+		Users=metier.getAllUsers();
+		props=null;
+		model.addAttribute("user", new Utilisateur());
+		model.addAttribute("users",Users);
 		return "users";
 	}
 	
@@ -77,9 +86,11 @@ public class AdminUsersController {
 			u.setPhoto(file.getOriginalFilename());
 			Long idP=null;
 			if(u.getID() == null){
+				u.setDateCreation(new Date());
 			  idP = metier.ajouterUtilisateur(u);
 			}
 			else{
+				u.setDateModification(new Date());
 			  metier.modifierUtilisateur(u);
 			  idP=u.getID();
 			}
@@ -87,8 +98,16 @@ public class AdminUsersController {
 		}
 		else{
 			if(u.getID()==null)
-			  metier.ajouterUtilisateur(u);
-			else metier.modifierUtilisateur(u);
+			{
+				u.setDateCreation(new Date());
+				metier.ajouterUtilisateur(u);
+				
+			}
+			else 
+			{
+				u.setDateModification(new Date());
+				metier.modifierUtilisateur(u);
+			}
 		}
 		
 		
@@ -97,10 +116,13 @@ public class AdminUsersController {
 		/*if(u.getID()==-1)metier.ajouterUtilisateur(u);
 		else  metier.modifierUtilisateur(u);*/
 		
-	
+		// Si l'utilisateur est entrain de modifier la liste résultante d'une recherche
+		// alors on la recharge avec getUserByProperties sinon on récupère tous les utilisateurs
+		if(props==null)Users=metier.getAllUsers();
+		else Users=metier.getUsersByProperties(props);
 		
 		model.addAttribute("user", new Utilisateur());	
-		model.addAttribute("users",metier.getAllUsers());
+		model.addAttribute("users",Users);
 		return "users";
 	}
 	
@@ -115,7 +137,7 @@ public class AdminUsersController {
 		}
 		
 		*/
-		Map<String,Object> props=new TreeMap<String,Object>();
+		props=new TreeMap<String,Object>();
 		
 		if(u.getID()!=null) props.put("ID", u.getID());
 		else
@@ -133,9 +155,9 @@ public class AdminUsersController {
 			
 			
 		}
-		
+		Users=metier.getUsersByProperties(props);
 		model.addAttribute("user", new Utilisateur());	
-		model.addAttribute("users",metier.getUsersByProperties(props));
+		model.addAttribute("users",Users);
 		return "users";
 	}
 	@RequestMapping(value="photoUser",produces=MediaType.IMAGE_JPEG_VALUE)
@@ -150,15 +172,18 @@ public class AdminUsersController {
 	public String supp(long userID,Model model){
 		Utilisateur u=metier.getUser(userID);
 		metier.supprimerUtilisateur(u);
+		if(props==null)Users=metier.getAllUsers();
+		else Users=metier.getUsersByProperties(props);
 		model.addAttribute("user", new Utilisateur());	
-		model.addAttribute("users",metier.getAllUsers());
+		model.addAttribute("users",Users);
 		return "users";
 	}
 	@RequestMapping(value="/editUser")
 	public String edit(long userID,Model model){
 		Utilisateur u=metier.getUser(userID);
+		
 		model.addAttribute("user", u);	
-		model.addAttribute("users",metier.getAllUsers());
+		model.addAttribute("users",Users);
 		return "users";
 	}
 	

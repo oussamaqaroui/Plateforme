@@ -76,6 +76,7 @@
       <tr>
        <td><input type="submit" value="Save" name="save"/></td>
        <td><input type="submit" value="Find" name="find"/></td>
+       <td><input type="submit" value="Get All Users" name="getAll"/></td>
       </tr>
    </table>
  </f:form>
