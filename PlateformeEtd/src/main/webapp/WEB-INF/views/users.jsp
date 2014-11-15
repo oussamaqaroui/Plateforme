@@ -4,7 +4,7 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/style1.css">
-  <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/calendrier.js"></script>
+
 </head>
 <div class="errors">
   ${exception }
@@ -14,12 +14,6 @@
 
 <div id="formUser" class="cadre">
 
-<!-- Tableau obligatoire ! C'est lui qui contiendra le calendrier ! -->
-<table class="ds_box" id="ds_conclass" style="display: none;">
-			<tr>
-				<td id="ds_calclass"></td>
-			</tr>
-</table>
  <f:form modelAttribute="user" action="saveUser" method="post" enctype="multipart/form-data">
    <table>
      <tr>
@@ -29,8 +23,8 @@
      </tr>
      <tr>
      <td>Login</td>
-       <td><f:input path="Login"/></td>
-       <td><f:errors path="Login" cssClass="errors"></f:errors></td>
+       <td><f:input path="login"/></td>
+       <td><f:errors path="login" cssClass="errors"></f:errors></td>
      </tr>
      <td>password</td>
        <td><f:input path="password"/></td>
@@ -71,7 +65,7 @@
      </tr>
      <tr> 
      <td>Date naissance</td>
-       <td><f:input path="dateNaissance" type="date"  onclick="ds_sh(this);"/></td>
+       <td><f:input path="dateNaissance" type="date" /></td>
        <td><f:errors path="dateNaissance" cssClass="errors"></f:errors></td>
      </tr>
        <tr>
@@ -80,7 +74,8 @@
        <td><f:errors path="active" cssClass="errors"></f:errors></td>
      </tr>   
       <tr>
-       <td><input type="submit" value="Save"/></td>
+       <td><input type="submit" value="Save" name="save"/></td>
+       <td><input type="submit" value="Find" name="find"/></td>
       </tr>
    </table>
  </f:form>
