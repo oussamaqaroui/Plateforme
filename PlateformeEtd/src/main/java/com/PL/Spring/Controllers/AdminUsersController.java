@@ -1,6 +1,7 @@
 package com.PL.Spring.Controllers;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -82,8 +83,9 @@ public class AdminUsersController {
 		
 		
 		if(!file.isEmpty()){
-			String path=System.getProperty("java.io.tmpdir");
-			u.setPhoto(file.getOriginalFilename());
+			//String path=System.getProperty("java.io.tmpdir");
+			BufferedImage bi=ImageIO.read(file.getInputStream());
+			u.setPhoto(file.getBytes());
 			Long idP=null;
 			if(u.getID() == null){
 				u.setDateCreation(new Date());
@@ -94,7 +96,7 @@ public class AdminUsersController {
 			  metier.modifierUtilisateur(u);
 			  idP=u.getID();
 			}
-			file.transferTo(new File(path+"/"+"PROD_"+idP+"_"+file.getOriginalFilename()));
+			//file.transferTo(new File(path+"/"+"PROD_"+idP+"_"+file.getOriginalFilename()));
 		}
 		else{
 			if(u.getID()==null)
@@ -160,12 +162,16 @@ public class AdminUsersController {
 		model.addAttribute("users",Users);
 		return "users";
 	}
-	@RequestMapping(value="photoUser",produces=MediaType.IMAGE_JPEG_VALUE)
+@RequestMapping(value="photoUser",produces=MediaType.IMAGE_JPEG_VALUE)
 	@ResponseBody
 	public  byte[] photoUser(Long userID) throws IOException{
 		//Comment afficher une image
-		return null;
+		Utilisateur e=metier.getUser(userID);
+		
+		
+		return IOUtils.toByteArray(new ByteArrayInputStream(e.getPhoto()));
 	}
+	
 	
 	
 	@RequestMapping(value="/suppUser")
@@ -187,5 +193,5 @@ public class AdminUsersController {
 		return "users";
 	}
 	
-
+    
 }

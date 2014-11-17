@@ -30,7 +30,7 @@ public class Utilisateur {
 	@NotEmpty
 	private String email;
 	@Lob
-	private String photo;
+	private byte[] photo;
 	
 	private boolean active;//Pour savoir si le compte est activé ou pas
 	
@@ -105,10 +105,13 @@ public class Utilisateur {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPhoto() {
+	 
+
+
+	public byte[] getPhoto() {
 		return photo;
 	}
-	public void setPhoto(String photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 	public boolean getActive() {
@@ -118,11 +121,13 @@ public class Utilisateur {
 		this.active = active;
 	}
 	
-	
-	public Utilisateur(long iD, String login, String password, String nom,
-			String prenom, String email, String photo, boolean active) {
+	 
+	public Utilisateur(String login, String password, String nom,
+			String prenom, String email, byte[] photo, boolean active,
+			Date dateNaissance, String adresse, Date dateCreation,
+			Date dateModification) {
 		super();
-		ID = iD;
+		
 		this.login = login;
 		this.password = password;
 		this.nom = nom;
@@ -130,6 +135,10 @@ public class Utilisateur {
 		this.email = email;
 		this.photo = photo;
 		this.active = active;
+		this.dateNaissance = dateNaissance;
+		this.adresse = adresse;
+		this.dateCreation = dateCreation;
+		this.dateModification = dateModification;
 	}
 	@Override
 	public String toString() {
